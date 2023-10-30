@@ -8,10 +8,11 @@ export const usersSlice = createSlice({
     error: false,
     success: false,
     list: [],
-    show:false,
+    showAddEmployeeForm:false,
     select:null,
     refresh:false,
-    // showUpdateForm: false,
+    showUpdateForm: false,
+    selectedEmployee: {}
   },
   reducers: {
     loadUsers: (state) => {
@@ -30,16 +31,27 @@ export const usersSlice = createSlice({
       state.success = false;
       state.error = true;
     },
-    changeShow: (state) =>{
-      state.show=true;
+    changeAddShow: (state) =>{
+      state.showAddEmployeeForm=true;
+      state.showUpdateForm=false;
     },
-    changeHide: (state) =>{
-      state.show=false;
+    changeAddHide: (state) =>{
+      state.showAddEmployeeForm=false;
     },
+    changeUpdateShow:(state, action)=>{
+      state.showUpdateForm=true;
+      state.selectedEmployee = action.payload
+      state.showAddEmployeeForm=false;
+
+    },
+    changeUpdateHide:(state)=>{
+      state.showUpdateForm=false;
+
+    }
 
   },
 })
 
-export const { loadUsers, loadUsersSuccess, loadUsersFailure, changeShow, changeHide } = usersSlice.actions;
+export const { loadUsers, loadUsersSuccess,changeAddShow, loadUsersFailure, changeAddHide, changeUpdateShow, changeUpdateHide} = usersSlice.actions;
 
 export default usersSlice.reducer;

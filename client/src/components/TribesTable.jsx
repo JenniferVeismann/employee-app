@@ -3,7 +3,6 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
-import instance from '../index';
 import TribesData from './TribesData';
 
 function TribesTable(){
@@ -15,19 +14,6 @@ function TribesTable(){
     <th scope = "row">{tribe.name}</th>
     <td>{tribe.department}</td>
     </tr>));
-
-// instance.get('employees/')
-// .then(function (response) {
-//   // handle success
-//   console.log(response);
-// })
-// .catch(function (error) {
-//   // handle error
-//   console.log(error);
-// })
-// .finally(function () {
-//   // always executed
-// });
 
 
     return(

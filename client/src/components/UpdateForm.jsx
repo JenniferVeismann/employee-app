@@ -10,7 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import { useDispatch, useSelector } from 'react-redux';
 import '../index.css';
-import { closeForm } from '../store/actions/employees';
+import { submitUpdate } from '../store/actions/employees';
 
 
 
@@ -20,8 +20,11 @@ export default function UpdateForm(props) {
   const dispatch = useDispatch();
 
 
-  const {employees, setEmployee, selectedEmployee, onHide } = props;
-  const show=useSelector((state)=>state.users.show)
+  const {employees, setEmployee } = props;
+  const show=useSelector((state)=>state.users.showUpdateForm)
+  const selectedEmployee=useSelector((state)=>state.users.selectedEmployee)
+  const [value, setValue] = useState(selectedEmployee.tribe_id || '1' );
+
   //const [show, setShow] = useState(true);
   // console.log('siin');
   
@@ -29,25 +32,30 @@ export default function UpdateForm(props) {
     initialValues: {
       employeeName: selectedEmployee.name,
       title: selectedEmployee.title,
-      tribe: selectedEmployee.tribe_id,
+      tribe: value
     },
   });
 
-  const [value, setValue] = useState(selectedEmployee.tribe_id);
+  // const [value, setValue] = useState(selectedEmployee.tribe_id);
+  
 
-
-  const handleSelect = e => {
-    console.log(e);
+  const handleSelect = (e) => {
     setValue(e);
   };
 
 
   const handleUpdate = () => {
         
-    updated();
+    const upDatedEmployee = {
+      id: selectedEmployee.id,
+      name: formik.values.employeeName,
+      title: formik.values.title,
+      tribe_id: value,
+    };
+    dispatch(submitUpdate(upDatedEmployee))
 
     formik.resetForm();
-    dispatch(closeForm())
+    //dispatch(closeForm())
     setValue('');
 }
 const updated = () => {
@@ -79,7 +87,7 @@ const updated = () => {
     <Container>
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
-          <Modal show={show} onHide={onHide}>
+          <Modal show={show} >
             <Modal.Header closeButton>
               <Modal.Title>Update Employee</Modal.Title>
             </Modal.Header>
@@ -106,8 +114,10 @@ const updated = () => {
                 <Form.Group className="tribe" controlId="formEmployee">
                   <Form.Label>Tribe</Form.Label>
                   <DropdownButton
+                    
                     onSelect={handleSelect}
-                    title={value}
+                    title = {value}
+              
                   >
                     <Dropdown.Item eventKey="1">Internstellar</Dropdown.Item>
                     <Dropdown.Item eventKey="2">Billing</Dropdown.Item>

@@ -19,9 +19,8 @@ import { closeForm, fetchData, showFormEmployee } from '../store/actions/employe
 
 function EmployeeForm() {
 
-  console.log('formsis')
   const dispatch = useDispatch();
-  const showForm=useSelector((state)=>state.users.show)
+  const showForm=useSelector((state)=>state.users.showAddEmployeeForm)
 
   const formik = useFormik({
     initialValues: {
@@ -36,8 +35,7 @@ function EmployeeForm() {
 
   const handleAddEmployee = async (newEmployee) => {
     try {
-			 const response = await instance.put('/employees', newEmployee);
-       console.log(response);
+			 const response = await instance.post('/employees', newEmployee);
        dispatch(fetchData());
     } catch (error) {
       console.log(error);
@@ -69,7 +67,7 @@ function EmployeeForm() {
     <Container>
       <Row>
         <Col md={{ span: 3, offset: 8 }}>
-        <Button variant="success" type="button" onClick={() => dispatch(showFormEmployee())}>
+        <Button variant="success" type="button" onClick={() =>{console.log("buttonclick");  dispatch(showFormEmployee())}}>
         + Employee
       </Button>
           <p></p>

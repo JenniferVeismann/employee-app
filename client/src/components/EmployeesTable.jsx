@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import '../index.css';
-import { fetchData, handleDelete, handleUpdateClick, showFormEmployee } from '../store/actions/employees';
+import { fetchData, handleDelete, handleUpdateClick } from '../store/actions/employees';
 import EmployeeForm from './EmployeeForm';
 import UpdateForm from './UpdateForm';
 
@@ -14,12 +14,12 @@ function EmployeesTable(){
   const dispatch = useDispatch();
 
   const employees=useSelector((state)=> state.users.list);
-  const showForm=useSelector((state)=>state.users.show)
+  const showForm=useSelector((state)=>state.users.showUpdateForm)
   const selectedEmployee=useSelector((state)=>state.users.select)
 
-
-
+  const [employee,setemployee]=useState({})
   
+
   const refresh=useSelector((state)=>state.users.refresh)
 
 
@@ -43,7 +43,9 @@ function EmployeesTable(){
                     </svg></button></td>
 
     <td><button type="button" className="update" variant="success" onClick={
-                  () =>dispatch(showFormEmployee(),handleUpdateClick(employee))
+                  () => {
+                    
+                    dispatch( handleUpdateClick(employee))}
                   }>
                   Update
                   </button>
@@ -52,7 +54,6 @@ function EmployeesTable(){
 
     return(
       <Container>
-    
       <Row className="justify-content-md-center">
         <Col md={10}>
         <p></p>
@@ -60,13 +61,9 @@ function EmployeesTable(){
           {showForm && (
             <UpdateForm
               selectedEmployee={selectedEmployee}
+              setemployee={setemployee}
               employees={employees}
-              setEmployee={dispatch(employees)}
-              onHide={() => {
-                dispatch(showFormEmployee());
-              }}
-            />
-          )}
+            ></UpdateForm>)}
           <Table striped bordered hov="true">
               <thead>
                 <tr>
@@ -84,8 +81,6 @@ function EmployeesTable(){
         </Col>
     </Row>
     <EmployeeForm ></EmployeeForm>
-</Container>
-    )
-}
+    </Container>)}
 
 export default EmployeesTable;
