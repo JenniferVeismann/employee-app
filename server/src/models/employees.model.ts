@@ -105,10 +105,10 @@ export async function deleteEmployee(fastify: FastifyInstance, id: number) {
 }
 
 export async function  updateEmployee(fastify: FastifyInstance, id: number, employee: EmployeeBodyType){
-  
+
   //await fastify.db.from(TABLE_NAME).where({id}).update()
   const employeeQueryResult = await fastify.db(TABLE_NAME)
   .where({ "employees.id": id })
   .update(employee)
-  
+
 }
