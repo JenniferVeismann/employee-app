@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: "Source Sans Pro", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Source Sans Pro", sans-serif;
+}
+.delete {
+  color: black;
+  border-radius: 75%;
+  border-color: transparent;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 450px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+}
+tr:hover {background-color: #D7F9D3;}
+
+
+.navibar{
+/* background-color: #cfd0f9; */
+border-radius: 15%;
+padding: 10px;
+}
+.formstyle {
+  
+  max-width: 300px;
+  min-width: 250px;
+  padding: 10px 50px;
+  border-radius: 10px;
+  font-family: raleway;
+  font-size: 20px;
+  left: 50%;
+  top: 17%;
+  background-color: #D7F9D3;
+}
+
+.Logo{
+  padding-left: 20px;
+}

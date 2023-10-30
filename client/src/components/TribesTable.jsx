@@ -1,0 +1,58 @@
+import React, { useState } from 'react';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Table from 'react-bootstrap/Table';
+import instance from '../index';
+import TribesData from './TribesData';
+
+function TribesTable(){
+  const [tribes, setTribe] = useState(
+    TribesData);
+
+  const listTribes = tribes.map((tribe) =>( 
+  <tr key={tribe.id}>
+    <th scope = "row">{tribe.name}</th>
+    <td>{tribe.department}</td>
+    </tr>));
+
+// instance.get('employees/')
+// .then(function (response) {
+//   // handle success
+//   console.log(response);
+// })
+// .catch(function (error) {
+//   // handle error
+//   console.log(error);
+// })
+// .finally(function () {
+//   // always executed
+// });
+
+
+    return(
+<Container>
+    <Row className="justify-content-md-center">
+        <Col md={10}>
+        <p></p>
+          <h1>Tribes</h1>
+          <Table striped bordered hov>
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Department</th>
+                </tr>
+              </thead>
+              <tbody>
+              {listTribes}
+              </tbody>
+            </Table>
+            </Col>
+            </Row>
+            <p>
+            </p>
+
+</Container>
+    );
+}
+export default TribesTable;
